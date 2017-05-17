@@ -23,10 +23,10 @@ func main() {
 		go connectionHandler(conn)
 	}
 }
-func initServer(hostAndPort string) *net.TCPListener {
+func initServer(hostAndPort string) net.Listener {
 	serverAddr, err := net.ResolveTCPAddr("tcp", hostAndPort)
 	checkError(err, "Resolving address:port failed: '"+hostAndPort+"'")
-	listener, err := net.Listen("tcp", serverAddr)
+	listener, err := net.Listen("tcp", serverAddr.String())
 	checkError(err, "ListenTCP: ")
 	println("Listening to: ", listener.Addr().String())
 	return listener
